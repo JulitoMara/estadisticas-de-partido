@@ -1,5 +1,5 @@
 /* Importación de Google Fonts: Inter (si no se hace vía Codepen settings) */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap'); */
 
 /* Colores y Variables para una estética profesional */
 :root {
@@ -222,7 +222,9 @@ button:hover {
 /* Media Query para pantallas grandes: 2 columnas */
 @media (min-width: 768px) {
     .match-dashboard {
-        grid-template-columns: 320px 3fr;
+        /* ANTES: grid-template-columns: 320px 1fr; */
+        /* CAMBIO: La primera columna sigue siendo fija, la segunda (estadísticas) es flexible */
+        grid-template-columns: 320px 3fr; /* O 1fr, dependiendo de cómo quieras la proporción. '3fr' dará más espacio a la derecha */
     }
 
     .left-column {
@@ -232,15 +234,16 @@ button:hover {
     }
 
     .right-column {
-        /* max-height: calc(100vh - 200px); */
+        /* max-height: calc(100vh - 200px); */ /* Esto podría estar limitando el alto innecesariamente, lo comento si no es crítico */
         overflow-y: auto;
-        padding-right: 10px;
-        width: 100%;
+        padding-right: 10px; /* Mantener un poco de padding para el scrollbar */
+        /* Asegurar que la columna derecha ocupe el ancho disponible */
+        width: 100%; /* Asegura que ocupe todo el espacio de su celda de grid */
     }
 
     /* Ajuste para el contenedor principal, si el máximo de 1280px está limitando demasiado */
     .main-app-container {
-        /* max-width: 1280px; */
+        /* max-width: 1280px; */ /* Si tienes una pantalla más grande que 1280px y quieres aprovecharla, comenta o aumenta este valor */
     }
 }
 
@@ -294,7 +297,7 @@ button:hover {
 .controls .plus-btn:hover { background-color: #218838; }
 
 
-/* Posesión de Balón */
+/* Posesión de Balón - AJUSTES PARA DISPOSICIÓN HORIZONTAL! */
 .possession-section {
     padding: 15px;
 }
@@ -418,7 +421,7 @@ button:hover {
     gap: 8px;
     margin-bottom: 15px;
     padding: 12px;
-    display: flex;
+    display: flex; /* Añadido para que el input y botón estén en línea */
     align-items: center;
     justify-content: center;
 }
@@ -426,8 +429,8 @@ button:hover {
 #newStatName {
     padding: 8px 10px;
     font-size: 0.9em;
-    flex-grow: 1;
-    max-width: 250px;
+    flex-grow: 1; /* Permite que ocupe el espacio disponible */
+    max-width: 250px; /* Límite para que no sea demasiado largo */
 }
 
 #addStatBtn {
@@ -436,13 +439,16 @@ button:hover {
     flex-shrink: 0;
 }
 
-/* Grid de Estadísticas Personalizadas */
+/* Grid de Estadísticas Personalizadas - ¡AJUSTES PARA MÁS COLUMNAS! */
 .custom-stats-grid {
+    /* ANTES: grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); */
+    /* CAMBIO: Mínimo de 180px, permite más columnas. 'auto-fit' para llenar el espacio. */
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 12px;
     padding: 0;
-    width: 100%;
+    /* Eliminar cualquier max-width o margin: auto que pudiera estar centrándolo */
+    width: 100%; /* Asegura que ocupe el 100% del ancho de su contenedor */
 }
 
 .stat-row {
@@ -602,10 +608,10 @@ button:hover {
 
     /* Asegurar que la barra de añadir estadística se vea bien */
     .add-custom-stat-integrated {
-        flex-direction: column;
+        flex-direction: column; /* Apila el input y el botón en pantallas pequeñas */
         align-items: stretch;
     }
-    #newStatName { max-width: 100%; }
+    #newStatName { max-width: 100%; } /* Ocupa todo el ancho disponible */
 
 
     #resetAll {
